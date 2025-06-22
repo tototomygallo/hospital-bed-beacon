@@ -142,7 +142,7 @@ export function AIRecommendations() {
 const executeAI = async () => {
   setCalculating(true);
   try {
-    const response = await fetch('https://49f5-34-125-124-193.ngrok-free.app/ejecutar-ia', {
+    const response = await fetch('https://a495-34-68-171-179.ngrok-free.app/ejecutar-ia', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
