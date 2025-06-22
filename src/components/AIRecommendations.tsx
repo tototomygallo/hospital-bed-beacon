@@ -139,36 +139,40 @@ export function AIRecommendations() {
     }
   };
 
-  const executeAI = async () => {
-    setCalculating(true);
-    try {
-      const response = await fetch('http://cd62-34-139-34-18.ngrok-free.app/ejecutar-ia', {
-        method: 'GET'
-      });
+const executeAI = async () => {
+  setCalculating(true);
+  try {
+    const response = await fetch('https://49f5-34-125-124-193.ngrok-free.app/ejecutar-ia', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ parametro1: "iniciar" }) // este valor puede ser lo que quieras enviar
+    });
 
-      if (!response.ok) throw new Error('Error en la respuesta de la IA');
+    if (!response.ok) throw new Error('Error en la respuesta de la IA');
 
-      toast({
-        title: 'IA ejecutada',
-        description: 'Esperando resultados...'
-      });
+    toast({
+      title: 'IA ejecutada',
+      description: 'Esperando resultados...'
+    });
 
-      // ✅ Esperar unos segundos y refrescar
-      setTimeout(() => {
-        loadRecommendations();
-      }, 4000);
+    // Esperar unos segundos y refrescar recomendaciones
+    setTimeout(() => {
+      loadRecommendations();
+    }, 4000);
 
-    } catch (error) {
-      console.error('Error executing IA:', error);
-      toast({
-        title: 'Error',
-        description: 'No se pudo conectar con la IA.',
-        variant: 'destructive'
-      });
-    } finally {
-      setCalculating(false);
-    }
-  };
+  } catch (error) {
+    console.error('Error executing IA:', error);
+    toast({
+      title: 'Error',
+      description: 'No se pudo conectar con la IA.',
+      variant: 'destructive'
+    });
+  } finally {
+    setCalculating(false);
+  }
+};
 
   const assignBed = async (patientId: string, bedId: string) => {
     try {
